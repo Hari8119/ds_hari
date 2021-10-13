@@ -1,0 +1,89 @@
+DWh works on few functionalities those are:
+A) subject oriented
+B) Time_varient
+c)Non-volatile
+D)integrity
+
+----------------------------------------
+To process the data to DWH, we have approches like 
+A) Top to bottom Approch:Ralph Kimbol: Datasource--->Staging--->Data marts--->dwh
+Advantages: If any data corrupts the that particular subject will be corrupted
+Disdavantage: Complexity 
+B) Bottom to Top Approch:WH Inmon: Datsource--->staging--->DWH-->Datamarts
+Advantage: Easy process
+Disdvantage: If any data corrupts total DWH will be corrupted.
+
+Datamart: Subset of Datawarehouse, it will be grouping the data of particular subject [sale] [customer]
+DataWraehouse: Total data we will be loading directly into DWH
+
+----------------------------------------------------
+DMART
+Dimentional Tables:
+customer:
+product:
+Time:
+Store:
+sales:
+
+Fact Tables:
+Each dimetional table Key columns.
+measures[Calculations]:
+
+Q) In which tables[Dimentioan,Fact} contains the more data?
+Ans: Fact table will be having more data compared to dimentional tables.
+Beacuse fact table contains each and every dimentinal table key columns and their measures[calculations].
+
+Q) which one you will build the first is it Dimentional tables or fact table?
+Ans: First we will build[create] the dimentional tables and then we will build the fact tables based dimentional tables key columns.
+
+-----------------------------------------------------------------------
+Types Of dimentions:
+
+1) junk dimetion: miscilanious data which doesn't usefull for the calculation ex: gender, status
+2)Degenerated dimentions: By default the columns  will be stored in Fact tables, but it acts as dimentonal tables. Ex: invoicenumber,
+3) Role playing dimetion: it will be having multiple relationship with fact table: Time dimention                       transaction id
+4)dirty dimention: miscilanious data
+5) scd: scd1 , scd2, scd3:
+SCD Type1: Type1 will maintain only the current data it will not maintain any history.
+ex:
+ashok|2000|capgemini|ban
+ashok|2000|Capgemini|hyd
+SCD Type2: It will maintain current data and historical data based below pre requsets.
+To implement scd type2 we need to maintain few requirements[attributes]
+1.surrogate key: it will generate sequence number
+1|ashok|2000|capgemini|ban|2020-09-21|2021-04-13|N|0
+2|ashok|2000|Capgemini|hyd|2021-04-14|9999-12-31|N|1
+3|ashok|20000|Capgemini|hyd|2021-04-14|9999-12-31|Y|2
+
+2.start date:
+3.end date
+4.current flag
+5. version number
+6)conformed dimention: The dimention tables which is having relationship with multiple fact tables. Ex. Time dimention
+
+Scd Type3: It will maintian current data and previous data.
+ashok|2000|hyd|capgemini
+ashok|2000|ban|capa
+
+ename|sal|previous_locat|current_location|company
+ashok|2000|hyd|ban|capgemin
+ashok|2000|ban|chennai|capgemini
+
+--------------------------------
+
+
+Types of Fact tables:
+1) Additive fact:
+we summarize the data in each and every dimentional table present in fact table: date,product
+2)Non-Additive Facts: we can't  summed up all the dimentions present the fact table
+3) Semi additive fact: we can summed up few dimentional tables but not all: sale amount
+ Factless fact table: It acts as a fact but doesn't usefull for the calcultaions: attndence 
+ 
+ --------------------------------------
+ 
+two types of schema:
+
+Star schema:
+One fact tables surrounded by different dimentional tables
+Snowflake schema:one fact table surrounded by different dimentaional tables and each dimentional interlinked another dimentional table
+ 
