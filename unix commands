@@ -1,0 +1,100 @@
+DAY1
+stsome linx commands
+1.grep "^$" filename = it is used to findout emptylines in the given file
+2.grep -c "^$" filename = it is used to count of the emptyline in the given file
+3.grep -v "^$" filename = it is used to we show the execpt empty line are given file
+4.grep -n "^$" filename = it is used to findout number of where emptyline are there
+5.grep -v "^$" file1 file2 = overright the both files without emptyfiles
+
+1.fgrep "string 1
+  >string2               =it is used to findout the multiple strings
+  >string3" filename     
+
+
+SED implementations
+ is nothing but stream editor 
+ it is used to search and replace the strings
+
+1.string replace 
+
+   sed "s/string1/string2/g" filename             
+   here string1 is old one and string 2 is new one        here dont save the records
+        s=substitutin,g=globally
+
+2. sed "s/string1/string2/g" filename                     here modify and save also
+
+3.start of the word and end of the word are also repleaced
+    sed "s/\<string1/string2/g"filename                   here records are dont save  
+   if save sed -i -e "s/\<string1/string2/g"filename
+
+4.string passed through the emptyline
+   sed "s/^$/string/g"filename    it is for only show and dont save
+   if have to sav sed -i -e "s/^$/string/g"filename;
+
+5. printing cammand if you want which line
+     sed -n "3p" filename
+          it means 3rd line print
+     sed -n "1p
+            >3p" filename;
+          it means 1 and 3 file only printed
+     sed -n "1,3p" filename
+          it means 1 to 3 lines are printed
+6.delete particular digit number 
+      sed "s/\<[0-9][0-9][0-9]\>//g" filename;
+7.head -5 it means read top five one
+8.tail -5 it means read five from bottom
+9.fail -f is nothing bu to monitoring perpouse
+10.simaltaneously we can see to with help  "|"
+  like ls -l | we -l filename
+
+11.how can you display the unix server date
+    "date"
+
+12.how can you find out who is lagged in
+    "whoami"
+
+13.how can you find out unix sererver installed
+     "uname -a"
+
+14.cal 1 1996
+      January 1996
+Su Mo Tu We Th Fr Sa
+    1  2  3  4  5  6
+ 7  8  9 10 11 12 13
+14 15 16 17 18 19 20
+21 22 23 24 25 26 27
+28 29 30 31
+
+15.important operations on AWK
+   
+   a)To print the first item along with the row number(NR) separated with ” – “ from each line in employee
+     
+          $ awk '{print NR "- " $1}' employee
+
+   b) To return the second row/item from employee
+
+          $ awk '{print NR $2}' employee
+
+   c) To print any non empty line if present  
+
+          $ awk 'NF < 0' employee
+
+   d)To find the length of the longest line present in the file:
+
+          $ awk '{ if (length($0) > max) max = length($0) } END { print max }'
+
+   e) To count the lines in a file
+
+          $ awk 'END { print NR }' employee
+
+   f) Printing lines with more than 10 characters
+
+         $ awk 'length($0) > 10' employeee
+
+   g)To find/check for any string in any specific column
+
+         $ awk '{ if($3 == "sales") print $0;}' employee
+
+   h) To print the squares of first numbers from 1 to n say 6:
+
+        $ awk 'BEGIN { for(i=1;i<=6;i++) print "square of", i, "is",i*i; }' 
